@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { ThemeProvider } from '@material-ui/styles';
 import reportWebVitals from './reportWebVitals';
+import theme from './styles/theme';
+import App from './App';
+
+function WrapThemeAndContext() {
+  return (
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  )
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <WrapThemeAndContext />
   </React.StrictMode>,
   document.getElementById('root')
 );

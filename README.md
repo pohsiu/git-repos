@@ -1,6 +1,17 @@
-# Getting Started with Create React App
+## Goals
+1. Infinity Scrollable List Component
+2. Make request delay when request too quick in short time
+3. Define repository architechture
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Architechture
+* Use CRA to quick build project skeleton
+* Use material-ui as css framework and css-js method
+* Prepare components dir to put sharable dummy component
+* Prepare containers dir to put data process related components
+* Prepare context dir to put shared data (use)
+* Prepare styles/theme to customize the main theme on repo
+* Prepate utils to put available shared fns.
+
 
 ## Available Scripts
 
