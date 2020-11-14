@@ -2,6 +2,8 @@ import React from "react";
 import debounce from "lodash/debounce";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core";
 import ScrollableList, { fetchStateEnum } from "../components/ScrollableList";
 import { requestRepoApi } from "../utils";
@@ -24,13 +26,13 @@ const List = () => {
   const fetchRepos = React.useCallback(
     debounce(async (querySearch, isMore) => {
       if (!querySearch) return;
-      if (isMore) {
-        pageRef.current = pageRef.current + 1;
-      } else {
-        pageRef.current = 1;
-      }
       try {
         setFetchState({ state: fetchStateEnum.PENDING, loading: true });
+        if (isMore) {
+          pageRef.current = pageRef.current + 1;
+        } else {
+          pageRef.current = 1;
+        }
         const response = await requestRepoApi(querySearch, pageRef.current);
         await new Promise(resolve => setTimeout(resolve, 500)); // Add timeout
         setFetchState({ state: fetchStateEnum.RESOLVED, loading: false });
@@ -66,13 +68,18 @@ const List = () => {
       }
       return (
         <ListItem button key={item.node_id} className={classes.item} onClick={onClick} >
-          <ListItemText primary={item.name} secondary={item.stargazers_count} />
+          <ListItemAvatar>
+            <Avatar alt={item.name} src={item.owner.avatar_url}>
+              {!item.owner?.avatar_url && item.name[0]}
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={item.name} secondary={item.description} />
         </ListItem>
       )
     });
   }
   return (
-    <ScrollableList items={items} loadMore={loadMore} fetchState={fetchState}>
+    <ScrollableList loadMore={loadMore} fetchState={fetchState}>
       {renderItems()}
     </ScrollableList>
   )
