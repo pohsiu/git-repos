@@ -6,7 +6,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core";
 import ScrollableList, { fetchStateEnum } from "../components/ScrollableList";
-import { requestRepoApi } from "../utils";
+import { requestRepoAPI } from "../utils";
 import AppContext from "../context/app";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +33,7 @@ const List = () => {
         } else {
           pageRef.current = 1;
         }
-        const response = await requestRepoApi(querySearch, pageRef.current);
+        const response = await requestRepoAPI(querySearch, pageRef.current);
         await new Promise(resolve => setTimeout(resolve, 500)); // Add timeout
         setFetchState({ state: fetchStateEnum.RESOLVED, loading: false });
         setItems(prev => {

@@ -7,11 +7,15 @@ import AppContext from "../context/app";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    ...theme.div.flexContainerVertical,
     width: "40vw",
     padding: 48,
     height: "calc(100vh - 48px)",
     margin: "24px auto",
-    ...theme.div.flexContainerVertical,
+    [theme.breakpoints.down('xs')]: {
+      width: "calc(100% - 48px)",
+      margin: 24,
+    }
   },
   h5: {
     marginBottom: 16,
